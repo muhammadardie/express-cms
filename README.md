@@ -1,2 +1,2 @@
 # express-cms
-cms app created using express node js
+RESTful API service built using Express + MongoDB
