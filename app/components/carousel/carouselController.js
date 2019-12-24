@@ -17,9 +17,9 @@ exports.storeCarousel = (req, res) => {
 };
 
 exports.updateCarousel = (req, res) => {
-    update(carousel, req.params.carouselId, req.body, res);
+	updateImage(carousel, req.params.carouselId, req, res, 'image', 'carousel'); // (model, id, request, respond, fieldName, pathName)
 };
 
 exports.deleteCarousel = (req, res) => {
-    destroy(carousel, req.params.carouselId, res, 'carousel');
+    deleteImage(carousel, req.params.carouselId, req, res, 'image','carousel');
 };

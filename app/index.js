@@ -9,7 +9,12 @@ const
 	config = require('./config');
 
 // Connect to the database
-mongoose.connect(config.mongodb.url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(config.mongodb.url, {
+	useNewUrlParser: true, 
+	useUnifiedTopology: true, 
+	useCreateIndex: true,
+	useFindAndModify: false
+});
 
 // Load the routes ("controllers" -ish)
 app.use(middleware)

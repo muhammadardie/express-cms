@@ -5,5 +5,6 @@ const app    = express(),
 
 app.use(require('../components/user/userRouter'))
 app.use(require('../components/carousel/carouselRouter'))
+app.use(require('../components/service/serviceRouter'))
 
 module.exports = app
