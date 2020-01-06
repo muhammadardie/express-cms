@@ -22,6 +22,19 @@ exports.find = async (model, id, res) => {
 /**
  * Get all object by model
  */
+exports.findBy = (model, condition, res) => {
+    model.find(condition)
+         .then(model => {
+            res.json(model)
+         })
+         .catch(err => {
+            res.send({ error: condition+' not Found'})
+        });
+};
+
+/**
+ * Get all object by model
+ */
 exports.all = (model, res) => {
     model.find({})
          .then(model => {
