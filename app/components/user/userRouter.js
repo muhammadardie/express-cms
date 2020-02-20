@@ -4,6 +4,7 @@ const router = require('express').Router()
 
 router.get('/user', user.getUsers)
 router.post('/user', user.storeUser)
+router.post('/user/exist', user.existUser)
 
 router.get('/user/:userId', user.findUser)
 router.put('/user/:userId', user.updateUser)

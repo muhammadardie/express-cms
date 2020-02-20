@@ -20,3 +20,18 @@ exports.updateService = (req, res) => {
 exports.deleteService = (req, res) => {
     destroy(service, req.params.serviceId, res, 'service');
 };
+
+
+exports.existService = (req, res) => {
+	Promise.all([
+	  req.body.title && service.countDocuments({'title': req.body.title })
+	]).then( ([ foundTitle ]) => {
+		
+	  if(foundTitle > 0) {
+	  	res.json({exist: true, msg: 'Title already exist'})
+	  } else {
+	  	return res.json({exist: false})	
+	  }
+	  
+	});
+};

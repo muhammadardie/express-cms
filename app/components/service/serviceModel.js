@@ -18,6 +18,7 @@ const ServiceScheme = new Schema({
     desc: {
         type: String,
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Service', ServiceScheme);

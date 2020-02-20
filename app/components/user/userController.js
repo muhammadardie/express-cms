@@ -1,5 +1,5 @@
 import user from './userModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find, create, update, destroy, isExist } from '../repository/queryRepository';
 
 exports.findUser = (req, res) => {
     find(user, req.params.userId, res);
@@ -30,10 +30,25 @@ exports.updateUser = (req, res) => {
 	        return res.json(thisUser);
 	    });
 	});
-
-    // update(user, req.params.userId, req.body, res);
 };
 
 exports.deleteUser = (req, res) => {
     destroy(user, req.params.userId, res, 'user');
+};
+
+exports.existUser = (req, res) => {
+	Promise.all([
+	  req.body.username && user.countDocuments({'username': req.body.username }),
+	  req.body.email && user.countDocuments({'email': req.body.email })
+	]).then( ([ foundUser, foundEmail ]) => {
+		
+	  if(foundUser > 0) {
+	  	res.json({exist: true, msg: 'Username already exist'})
+	  } else if(foundEmail > 0) {
+	  	res.json({exist: true, msg: 'Email already exist'})	
+	  } else {
+	  	return res.json({exist: false})	
+	  }
+	  
+	});
 };

@@ -178,14 +178,14 @@ exports.deleteImage = (model, id, req, res, inputField, path) => {
  * remove old image by old name
  */
 const deleteOldImage = (model, id, path, inputField, res) => {
-  model.findById(id, (err, model) => {
+  model.findById(id, (err, thisModel) => {
       if (err) {
           res.send(err);
       }
 
       try {
-        if (fs.existsSync(uploadPath + path + '/' + model[inputField])) {
-          fs.unlinkSync(uploadPath + path + '/' + model[inputField])
+        if (fs.existsSync(uploadPath + path + '/' + thisModel[inputField])) {
+          fs.unlinkSync(uploadPath + path + '/' + thisModel[inputField])
         }
         //file removed
       } catch(err) {

@@ -19,6 +19,7 @@ const GalleryScheme = new Schema({
     desc: {
         type: String,
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Gallery', GalleryScheme);
