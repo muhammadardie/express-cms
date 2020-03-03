@@ -11,5 +11,4 @@ node_modules/
 .env
 .env.test
 
-# upload folder
-uploaded_files/
+.DS_Store
