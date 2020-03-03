@@ -1,5 +1,8 @@
 import about from './aboutModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find } from '../repository/queryRepository';
+import { storeImage, updateImage, deleteImage } from '../repository/fileRepository';
+
+// if in field contain file upload use fileRepository
 
 exports.findAbout = (req, res) => {
     find(about, req.params.aboutId, res);
@@ -10,13 +13,13 @@ exports.getAbouts = (req, res) => {
 };
 
 exports.storeAbout = (req, res) => {
-    create(about, req.body, res);
+	storeImage(about, req, res, 'image', 'about'); // (model, request, respond, fieldName, pathName)
 };
 
 exports.updateAbout = (req, res) => {
-    update(about, req.params.aboutId, req.body, res);
+	updateImage(about, req.params.aboutId, req, res, 'image', 'about'); // (model, id, request, respond, fieldName, pathName)
 };
 
 exports.deleteAbout = (req, res) => {
-    destroy(about, req.params.aboutId, res, 'about');
+    deleteImage(about, req.params.aboutId, req, res, 'image','about');
 };

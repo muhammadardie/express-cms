@@ -17,6 +17,7 @@ const AboutScheme = new Schema({
     desc: {
         type: String
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('About', AboutScheme);

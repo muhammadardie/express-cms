@@ -19,6 +19,7 @@ const ContactScheme = new Schema({
         type: String,
         required: "What is the contact mail?"
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Contact', ContactScheme);

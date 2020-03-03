@@ -22,6 +22,7 @@ const TeamScheme = new Schema({
         type: String,
         maxlength: 2000
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Team', TeamScheme);

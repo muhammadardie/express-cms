@@ -38,8 +38,8 @@ exports.deleteUser = (req, res) => {
 
 exports.existUser = (req, res) => {
 	Promise.all([
-	  req.body.username && user.countDocuments({'username': req.body.username }),
-	  req.body.email && user.countDocuments({'email': req.body.email })
+	  req.body.username && user.countDocuments({'username': req.body.username, '_id': { $ne: req.params.userId } }),
+	  req.body.email && user.countDocuments({'email': req.body.email, '_id': { $ne: req.params.userId } }),
 	]).then( ([ foundUser, foundEmail ]) => {
 		
 	  if(foundUser > 0) {
@@ -50,5 +50,8 @@ exports.existUser = (req, res) => {
 	  	return res.json({exist: false})	
 	  }
 	  
+	}).catch(err => {
+		console.log(err)
+		res.json({exist: true, msg: 'Failed to check existed'})
 	});
 };

@@ -17,11 +17,8 @@ const BlogScheme = new Schema({
     content: {
         type: String,
         required: "What is blog's content?"
-    }
-}, 
-    { 
-        timestamps: { createdAt: 'created_at' } 
-    }
-);
+        }
+},
+{timestamps: true});
 
 export default mongoose.model('Blog', BlogScheme);

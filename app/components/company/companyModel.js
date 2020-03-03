@@ -18,6 +18,7 @@ const CompanyScheme = new Schema({
         type: String,
         required: "What is company's description?"
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Company', CompanyScheme);

@@ -24,7 +24,7 @@ exports.deleteService = (req, res) => {
 
 exports.existService = (req, res) => {
 	Promise.all([
-	  req.body.title && service.countDocuments({'title': req.body.title })
+	  req.body.title && service.countDocuments({'title': req.body.title, '_id': { $ne: req.params.serviceId } })
 	]).then( ([ foundTitle ]) => {
 		
 	  if(foundTitle > 0) {
@@ -33,5 +33,8 @@ exports.existService = (req, res) => {
 	  	return res.json({exist: false})	
 	  }
 	  
+	}).catch(err => {
+		console.log(err)
+		res.json({exist: true, msg: 'Failed to check existed'})
 	});
 };

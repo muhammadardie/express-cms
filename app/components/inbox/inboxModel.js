@@ -23,7 +23,8 @@ const InboxScheme = new Schema({
         type: String,
         enum : ['received', 'readed', 'replied'],
         default: 'received'
-    },
-});
+    }
+},
+{timestamps: true});
 
 export default mongoose.model('Inbox', InboxScheme);

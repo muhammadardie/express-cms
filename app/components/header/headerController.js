@@ -27,3 +27,20 @@ exports.updateHeader = (req, res) => {
 exports.deleteHeader = (req, res) => {
     deleteImage(header, req.params.headerId, req, res, 'image','header');
 };
+
+exports.existHeader = (req, res) => {
+	Promise.all([
+	  req.body.page && header.countDocuments({'page': req.body.page, '_id': { $ne: req.params.headerId } }),
+	]).then( ([ foundPage ]) => {
+		
+	  if(foundPage > 0) {
+	  	res.json({exist: true, msg: 'Header for '+ req.body.page +' page already exist'})
+	  } else {
+	  	return res.json({exist: false})	
+	  }
+	  
+	}).catch(err => {
+		console.log(err)
+		res.json({exist: true, msg: 'Failed to check existed'})
+	});
+};

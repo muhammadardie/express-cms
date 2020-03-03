@@ -11,10 +11,15 @@ const SocmedScheme = new Schema({
         type: String,
         required: "What is the name of social media?"
     },
+    icon: {
+        type: String,
+        required: "What is the icon of social media?"
+    },
     url: {
         type: String,
         required: "What is the url of social media?"
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Socmed', SocmedScheme);

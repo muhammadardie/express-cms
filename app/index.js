@@ -14,6 +14,9 @@ mongoose.connect(config.mongodb.url, {
 	useUnifiedTopology: true, 
 	useCreateIndex: true,
 	useFindAndModify: false
+})
+.catch(error => { 
+	console.log(`Caught "${error.message}" at ${Date.now()}`); 
 });
 
 // Load the routes ("controllers" -ish)

@@ -9,8 +9,8 @@ import mongoose, {
 const HeaderScheme = new Schema({
     page: {
         type: String,
-        enum : ['work', 'feature', 'blog', 'about', 'contact'],
-        default: 'work',
+        enum : ['Work', 'Feature', 'Blog', 'About', 'Contact'],
+        default: 'Work',
         required: "What is the header's page?"
     },
     image: {

@@ -16,6 +16,7 @@ const TestimonyScheme = new Schema({
     comment: {
         type: String,
     }
-});
+},
+{timestamps: true});
 
 export default mongoose.model('Testimony', TestimonyScheme);
