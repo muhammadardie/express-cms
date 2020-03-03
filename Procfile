@@ -1,0 +1,1 @@
+web: nodemon ./app/server --exec babel-node --presets env | bistre
