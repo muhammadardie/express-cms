@@ -6,6 +6,7 @@ const app    = express(),
 	  join   = require('path').join,
 	  cors   = require('cors');
 
+app.use(cors())
 app.use(require('../components/auth/authRouter'))
 app.use(require('../components/user/userRouter'))
 app.use(require('../components/carousel/carouselRouter'))
@@ -22,7 +23,7 @@ app.use(require('../components/team/teamRouter'))
 app.use(require('../components/company/companyRouter'))
 
 // fetching image in uploaded file folder
-app.get('/fetchImage/:file(*)', cors(), (req, res) => {
+app.get('/fetchImage/:file(*)', (req, res) => {
     let file = req.params.file;
     let fileLocation = path.join(__dirname, '../../', 'uploaded_files/', file);
     //res.send({image: fileLocation});
