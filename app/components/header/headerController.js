@@ -4,6 +4,10 @@ import { storeImage, updateImage, deleteImage } from '../repository/fileReposito
 
 // if in field contain file upload use fileRepository
 
+const capitalizeFirstLetter = (string) => {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 exports.findHeader = (req, res) => {
     find(header, req.params.headerId, res);
 };
@@ -13,7 +17,8 @@ exports.getHeaders = (req, res) => {
 };
 
 exports.findHeaderByPage = (req, res) => {
-	findBy(header, req.params, res);
+	const param = { page: capitalizeFirstLetter(req.params.page) };
+	findBy(header, param, res);
 };
 
 exports.storeHeader = (req, res) => {
