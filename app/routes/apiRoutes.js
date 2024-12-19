@@ -1,13 +1,15 @@
 import express from 'express';
 import path from 'path';
+import { jwtMiddleware } from '../middleware/jwtMiddleware';
 
-const app    = express(),
-	  router = express.Router(),
-	  join   = require('path').join,
-	  cors   = require('cors');
+const app  = express()
+const cors = require('cors')
 
 app.use(cors())
 app.use(require('../components/auth/authRouter'))
+
+// Apply JWT middleware to protect all API routes
+app.use(jwtMiddleware);
 app.use(require('../components/user/userRouter'))
 app.use(require('../components/carousel/carouselRouter'))
 app.use(require('../components/service/serviceRouter'))

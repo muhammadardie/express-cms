@@ -1,6 +1,6 @@
 import blog from './blogModel.js';
-import { all, find } from '../repository/queryRepository';
-import { storeImage, updateImage, deleteImage } from '../repository/fileRepository';
+import { all, find } from '../../repositories/queryRepository.js';
+import { storeImage, updateImage, deleteImage } from '../../repositories/fileRepository.js';
 
 // if in field contain file upload use fileRepository
 

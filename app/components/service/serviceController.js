@@ -1,5 +1,5 @@
 import service from './serviceModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find, create, update, destroy } from '../../repositories/queryRepository.js';
 
 exports.findService = (req, res) => {
     find(service, req.params.serviceId, res);

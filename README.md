@@ -1,18 +1,34 @@
-# express-cms
-RESTful API service built using Express + MongoDB for managing simple cms data
+# Express CMS  
+RESTful API service for CMS applications using [Express framework](https://expressjs.com/) and [Bun](https://bun.sh/).  
+Admin page source code can be found [here](https://github.com/muhammadardie/admin-cms), and the front page is [here](https://github.com/muhammadardie/react-cms).  
 
-## Install
+The alternative version of this service was implemented using Go (echo), which can be found [here](https://github.com/muhammadardie/go-cms).  
 
-```sh
-git clone https://github.com/muhammadardie/express-cms.git
-npm install
-cp .env.example .env
-```
+## Features  
 
-After that add your MONGODB_URL in .env file then run
+- API Documentation `Swagger (auto-generate)`  
+- Authentication `JSON Web Token (JWT)`  
+- CRUD operations `MongoDB`  
+- Caching `Redis`  
+- Environment variables configuration  
 
-```sh
-npm start
-```
+## System Requirements  
 
-Now your services running on [http://localhost:1000/](http://localhost:1000/)
+- Bun  
+- MongoDB  
+- Redis  
+
+## Environment Variables  
+
+| **Key**          | **Description**                      |  
+| :--------------- | :----------------------------------- |  
+| MONGODB_URL      | URL to connect to MongoDB instance   |  
+| ACCESS_SECRET    | JWT key for access token             |  
+| REFRESH_SECRET   | JWT key for refresh token            |  
+| REDIS_ADDRESS    | URL to connect to Redis instance     |  
+| REDIS_PASSWORD   | Redis Password                       |  
+
+## Demo  
+
+- **APP**: [https://express-cms.muhammadardie.tech](https://express-cms.muhammadardie.tech)  
+- **Documentation**: [https://express-cms.muhammadardie.tech/api-docs/](https://express-cms.muhammadardie.tech/api-docs/)  

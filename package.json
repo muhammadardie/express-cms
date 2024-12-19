@@ -1,14 +1,15 @@
 {
-  "name": "express_code_structure",
+  "name": "express-cms",
   "version": "1.0.0",
-  "description": "CMS app",
+  "description": "API to provide data for CMS app",
   "scripts": {
-    "start": "nodemon ./app/server --exec babel-node --presets env | bistre",
-    "release": "npm run clean && npm run build && npm run serve",
-    "clean": "rm -rf dist && mkdir dist",
-    "build": "babel . -s -D -d dist --presets env --ignore node_modules",
-    "test": "./bin/test.sh",
-    "lint": "standard"
+    "start": "bun run dev",
+    "dev": "nodemon ./app/server --exec babel-node --presets env",
+    "release": "bun run clean && bun run build && bun run serve",
+    "clean": "bunx rimraf dist && bunx mkdirp dist",
+    "build": "bunx babel . -s -D -d dist --presets env --ignore node_modules",
+    "test": "bun ./bin/test.sh",
+    "lint": "bunx standard"
   },
   "main": "./app/server",
   "engines": {
@@ -31,20 +32,27 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bcryptjs": "^2.4.3",
-    "bistre": "^1.0.1",
-    "bole": "^4.0.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.4.5",
     "express": "^4.17.1",
     "express-validator": "^6.3.0",
     "formidable": "^1.2.1",
+    "jsonwebtoken": "^9.0.2",
     "mongoose": "^5.8.0",
     "mv": "^2.1.1",
     "nodemon": "^2.0.1",
+    "pino": "^9.5.0",
+    "redis": "^4.7.0",
     "standard": "^14.3.1",
     "supertest": "^4.0.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "tap-dot": "^2.0.0",
-    "tape": "^4.11.0"
+    "tape": "^4.11.0",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "pino-pretty": "^13.0.0"
   }
 }

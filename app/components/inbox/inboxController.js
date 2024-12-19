@@ -1,5 +1,5 @@
 import inbox from './inboxModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find, create, update, destroy } from '../../repositories/queryRepository.js';
 
 exports.findInbox = (req, res) => {
     find(inbox, req.params.inboxId, res);

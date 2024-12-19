@@ -1,5 +1,5 @@
-var config = module.exports
-var PRODUCTION = process.env.NODE_ENV === 'production'
+let config = module.exports
+let PRODUCTION = process.env.NODE_ENV === 'production'
 
 config.express = {
   port: process.env.PORT || 3000,
@@ -9,10 +9,16 @@ config.express = {
 config.mongodb = {
   url: process.env.MONGODB_URL || 27017
 }
+
+config.redis = {
+  url: process.env.REDIS_URL || 'http://localhost:6379'
+}
+
 if (PRODUCTION) {
-  // for example
   config.express.ip = '0.0.0.0'
 }
-// config.db same deal
-// config.email etc
-// config.log
+
+config.accessSecret = process.env.ACCESS_SECRET;
+config.refreshSecret = process.env.REFRESH_SECRET;
+config.accessTokenExpiry = process.env.ACCESS_TOKEN_EXPIRY;
+config.refreshTokenExpiry = process.env.REFRESH_TOKEN_EXPIRY;

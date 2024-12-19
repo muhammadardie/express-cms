@@ -1,24 +1,39 @@
-import mongoose, {
-    Schema
-} from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 /**
- * Create database scheme for carousel
+ * Create database schema for carousel
  */
 
-const CarouselScheme = new Schema({
-    image: {
-        type: String,
+const CarouselSchema = new Schema(
+    {
+        image: {
+            type: String,
+            required: [true, 'Image is required'],
+        },
+        tagline: {
+            type: String,
+            required: [true, 'Tagline is required'],
+            maxlength: [2000, 'Tagline must not exceed 2000 characters'], 
+            validate: {
+                validator: function (v) {
+                    return v.trim().length > 0;
+                },
+                message: 'Tagline cannot be empty',
+            },
+        },
+        tagdesc: {
+            type: String,
+            required: [true, 'Tag description is required'],
+            maxlength: [2000, 'Tag description must not exceed 2000 characters'],
+            validate: {
+                validator: function (v) {
+                    return v.trim().length > 0;
+                },
+                message: 'Tag description cannot be empty',
+            },
+        },
     },
-    tagline: {
-        type: String,
-        maxlength: 2000
-    },
-    tagdesc: {
-        type: String,
-        maxlength: 2000
-    }
-},
-{timestamps: true});
+    { timestamps: true }
+);
 
-export default mongoose.model('Carousel', CarouselScheme);
+export default mongoose.model('Carousel', CarouselSchema);

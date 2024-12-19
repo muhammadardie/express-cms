@@ -15,14 +15,37 @@ const UserScheme = new Schema({
     email: {
         type: String,
         lowercase: true,
-        required: "What is email user?"
+        unique: true,
+        required: "What is email user?",
+        validate: {
+            validator: async function(value) {
+                // If we're updating, make sure we skip the current user
+                if (this.isNew || this.isModified('email')) {
+                    const existingUser = await mongoose.model('User').findOne({ email: value });
+                    if (existingUser && existingUser._id.toString() !== this._id.toString()) {
+                        // Return false if email already exists (and is not the current user's email)
+                        throw new Error('Email already exists');
+                    }
+                }
+            },
+            message: 'Email already exists'
+        }
+
     },
     password: {
         type: String,
         required: "What is password user?"
     },
 },
-{timestamps: true});
+{ 
+    timestamps: true,
+    toJSON: {
+        transform: function(doc, ret, options) {
+            delete ret.password;  // Remove password from the JSON response
+            return ret;
+        }
+    }
+});
 
 const bcrypt = require('bcryptjs'),
       SALT_WORK_FACTOR   = 10;

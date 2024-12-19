@@ -1,6 +1,6 @@
 import header from './headerModel.js';
-import { all, find, findBy } from '../repository/queryRepository';
-import { storeImage, updateImage, deleteImage } from '../repository/fileRepository';
+import { all, find, findBy } from '../../repositories/queryRepository.js';
+import { storeImage, updateImage, deleteImage } from '../../repositories/fileRepository.js';
 
 // if in field contain file upload use fileRepository
 

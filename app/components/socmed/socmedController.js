@@ -1,5 +1,5 @@
 import socmed from './socmedModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find, create, update, destroy } from '../../repositories/queryRepository.js';
 
 exports.findSocmed = (req, res) => {
     find(socmed, req.params.socmedId, res);

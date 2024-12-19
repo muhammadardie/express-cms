@@ -1,5 +1,5 @@
 import contact from './contactModel.js';
-import { all, find, create, update, destroy } from '../repository/queryRepository';
+import { all, find, create, update, destroy } from '../../repositories/queryRepository.js';
 
 exports.findContact = (req, res) => {
     find(contact, req.params.contactId, res);

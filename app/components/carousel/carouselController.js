@@ -1,25 +1,25 @@
 import carousel from './carouselModel.js';
-import { all, find } from '../repository/queryRepository';
-import { storeImage, updateImage, deleteImage } from '../repository/fileRepository';
+import { all, find } from '../../repositories/queryRepository';
+import { storeImage, updateImage, deleteImage } from '../../repositories/fileRepository';
 
 // if in field contain file upload use fileRepository
 
-exports.findCarousel = (req, res) => {
-    find(carousel, req.params.carouselId, res);
+exports.findCarousel = async (req, res) => {
+    await find(carousel, req.params.carouselId, res);
 };
 
-exports.getCarousels = (req, res) => {
-    all(carousel, res);
+exports.getCarousels = async (req, res) => {
+    await all(carousel, res);
 };
 
-exports.storeCarousel = (req, res) => {
-	storeImage(carousel, req, res, 'image', 'carousel'); // (model, request, respond, fieldName, pathName)
+exports.storeCarousel = async (req, res) => {
+	await storeImage(carousel, req, res, 'image', 'carousel'); // (model, request, response, fieldName, pathName)
 };
 
-exports.updateCarousel = (req, res) => {
-	updateImage(carousel, req.params.carouselId, req, res, 'image', 'carousel'); // (model, id, request, respond, fieldName, pathName)
+exports.updateCarousel = async (req, res) => {
+	await updateImage(carousel, req.params.carouselId, req, res, 'image', 'carousel'); // (model, id, request, response, fieldName, pathName)
 };
 
-exports.deleteCarousel = (req, res) => {
-    deleteImage(carousel, req.params.carouselId, req, res, 'image','carousel');
+exports.deleteCarousel = async (req, res) => {
+    await deleteImage(carousel, req.params.carouselId, req, res, 'image','carousel');
 };

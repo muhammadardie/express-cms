@@ -1,23 +1,21 @@
-#!/usr/bin/env node
-const 
-	dotenv = require('dotenv').config(),
-	app    = require('../index'),
-	config = require('../config'),
-	bole   = require('bole'), // logging system
-	log    = bole('server');
+import "dotenv/config.js";
+import logger from '../utils/logger';
 
+const app    = require('../index')
+const config = require('../config')
 
-bole.output({level: 'debug', stream: process.stdout})
-log.info('server process starting')
+// Test logs
+logger.debug('Debug level message');
+logger.info('Server process starting');
 
-// Note that there's not much logic in this file.
-// The server should be mostly "glue" code to set things up and
-// then start listening
+logger.info('Server process starting');
+
+// Server setup and listener
 app.listen(config.express.port, config.express.ip, function (error) {
   if (error) {
-    log.error('Unable to listen for connections', error)
+    logger.error('Unable to listen for connections', error)
     process.exit(10)
   }
-  log.info('express is listening on http://' +
+  logger.info('express is listening on ' +
     config.express.ip + ':' + config.express.port)
 })
