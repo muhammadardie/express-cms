@@ -63,6 +63,9 @@ exports.storeImage = async (model, req, res, inputField, path) => {
       if (fs.existsSync(uploadedFilePath)) {
         fs.unlinkSync(uploadedFilePath);
       }
+      if (error.name === 'ValidationError') {
+        return errorResponse(res, error.message, error.errors);
+      }
 
       errorResponse(res, "Failed to store data", error);
     }
@@ -141,6 +144,11 @@ exports.updateImage = (model, id, req, res, inputField, path) => {
       if (fs.existsSync(uploadedFilePath)) {
         fs.unlinkSync(uploadedFilePath);
       }
+
+      if (error.name === 'ValidationError') {
+        return errorResponse(res, error.message, error.errors);
+      }
+      
       errorResponse(res, "Failed to update data", error);
     }
   });

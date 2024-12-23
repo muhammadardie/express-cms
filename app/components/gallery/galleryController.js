@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findGallery = (req, res) => {
-    find(gallery, req.params.galleryId, res);
+exports.findGallery = async (req, res) => {
+    await find(gallery, req.params.galleryId, res);
 };
 
-exports.getGallerys = (req, res) => {
-    all(gallery, res);
+exports.getGallerys = async (req, res) => {
+    await all(gallery, res);
 };
 
-exports.storeGallery = (req, res) => {
+exports.storeGallery = async (req, res) => {
 	storeImage(gallery, req, res, 'image', 'gallery'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateGallery = (req, res) => {
+exports.updateGallery = async (req, res) => {
 	updateImage(gallery, req.params.galleryId, req, res, 'image', 'gallery'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteGallery = (req, res) => {
-    deleteImage(gallery, req.params.galleryId, req, res, 'image','gallery');
+exports.deleteGallery = async (req, res) => {
+    await deleteImage(gallery, req.params.galleryId, req, res, 'image','gallery');
 };

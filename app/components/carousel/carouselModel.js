@@ -13,7 +13,7 @@ const CarouselSchema = new Schema(
         tagline: {
             type: String,
             required: [true, 'Tagline is required'],
-            maxlength: [2000, 'Tagline must not exceed 2000 characters'], 
+            maxlength: [250, 'Tagline must not exceed 250 characters'], 
             validate: {
                 validator: function (v) {
                     return v.trim().length > 0;

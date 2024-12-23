@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findTestimony = (req, res) => {
-    find(testimony, req.params.testimonyId, res);
+exports.findTestimony = async (req, res) => {
+    await find(testimony, req.params.testimonyId, res);
 };
 
-exports.getTestimonys = (req, res) => {
-    all(testimony, res);
+exports.getTestimonys = async (req, res) => {
+    await all(testimony, res);
 };
 
-exports.storeTestimony = (req, res) => {
-	storeImage(testimony, req, res, 'avatar', 'testimony'); // (model, request, respond, fieldName, pathName)
+exports.storeTestimony = async (req, res) => {
+	await storeImage(testimony, req, res, 'avatar', 'testimony'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateTestimony = (req, res) => {
-	updateImage(testimony, req.params.testimonyId, req, res, 'avatar', 'testimony'); // (model, id, request, respond, fieldName, pathName)
+exports.updateTestimony = async (req, res) => {
+	await updateImage(testimony, req.params.testimonyId, req, res, 'avatar', 'testimony'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteTestimony = (req, res) => {
-    deleteImage(testimony, req.params.testimonyId, req, res, 'avatar','testimony');
+exports.deleteTestimony = async (req, res) => {
+    await deleteImage(testimony, req.params.testimonyId, req, res, 'avatar','testimony');
 };

@@ -9,16 +9,35 @@ import mongoose, {
 const SocmedScheme = new Schema({
     name: {
         type: String,
-        required: "What is the name of social media?"
+        maxlength: 150,
+        required: [true, 'Name is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Name cannot be empty',
+        },
     },
     icon: {
         type: String,
-        required: "What is the icon of social media?"
+        maxlength: [100, 'Icon must not exceed 100 characters'], 
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'icon cannot be empty',
+        },
     },
     url: {
         type: String,
-        required: "What is the url of social media?"
-    }
+        required: [true, 'URL is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'URL cannot be empty',
+        },
+    },
 },
 {timestamps: true});
 
