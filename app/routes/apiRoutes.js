@@ -20,16 +20,7 @@ app.use(require('../components/blog/blogRouter'))
 app.use(require('../components/header/headerRouter'))
 app.use(require('../components/about/aboutRouter'))
 app.use(require('../components/contact/contactRouter'))
-app.use(require('../components/inbox/inboxRouter'))
 app.use(require('../components/team/teamRouter'))
 app.use(require('../components/company/companyRouter'))
-
-// fetching image in uploaded file folder
-app.get('/fetchImage/:file(*)', (req, res) => {
-    let file = req.params.file;
-    let fileLocation = path.join(__dirname, '../../', 'uploaded_files/', file);
-    //res.send({image: fileLocation});
-    res.sendFile(`${fileLocation}`)
-})
 
 module.exports = app

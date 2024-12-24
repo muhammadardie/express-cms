@@ -2,6 +2,7 @@ import path from "path";
 import formidable from "formidable";
 import fs from "fs";
 import { destroy } from "./queryRepository";
+import logger from '../utils/logger';
 import { errorResponse, successResponse } from "../utils/response.js";
 
 const uploadPath = path.join(__dirname, "../../", "uploaded_files/");
@@ -46,8 +47,23 @@ exports.storeImage = async (model, req, res, inputField, path) => {
   form.parse(req, async (err, fields, files) => {
     if (err) return errorResponse(res, "Error parsing form data");
 
-    if (!files[inputField])
-      return errorResponse(res, `${inputField} is required`, 400);
+    if (!files[inputField]) {
+      return errorResponse(res, `Validation error: ${inputField} is required`,
+        {
+          inputField : {
+            "name": "ValidatorError",
+            "message": `${inputField} is required`,
+            "properties": {
+                "message": `${inputField} is required`,
+                "type": "required",
+                "path": inputField
+            },
+            "kind": "required",
+            "path": inputField
+          }
+        },
+      )
+    }
 
     // Validate image size (10 MB limit using binary system)
     if (files[inputField].size > 10485760)
@@ -57,7 +73,7 @@ exports.storeImage = async (model, req, res, inputField, path) => {
       fields[inputField] = newFileName;
       const record = await model.create(fields);
 
-      successResponse(res, `${model.modelName} created successfully`, record);
+      return successResponse(res, `${model.modelName} created successfully`, record);
     } catch (error) {
       // Delete the uploaded file if the database operation fails
       if (fs.existsSync(uploadedFilePath)) {
@@ -67,7 +83,7 @@ exports.storeImage = async (model, req, res, inputField, path) => {
         return errorResponse(res, error.message, error.errors);
       }
 
-      errorResponse(res, "Failed to store data", error);
+      return errorResponse(res, "Failed to store data", error);
     }
   });
 };
@@ -110,8 +126,13 @@ exports.updateImage = (model, id, req, res, inputField, path) => {
           runValidators: true,
         })
         .catch((err) => {
-          errorResponse(res, "Failed to update data", err);
+          logger.error(err)
+          return err
         });
+
+      if (record instanceof Error) {
+        return errorResponse(res, "Failed to update data", record.errors);
+      }
       
       // Now handle the image if it's uploaded
       if (files[inputField]) {
@@ -130,14 +151,14 @@ exports.updateImage = (model, id, req, res, inputField, path) => {
         fs.unlinkSync(oldPath);
 
         // Respond with success
-        successResponse(
+        return successResponse(
           res,
           `${model.modelName} updated successfully with image`,
           record
         );
       } else {
         // No image uploaded, just respond with the updated record
-        successResponse(res, `${model.modelName} updated successfully`, record);
+        return successResponse(res, `${model.modelName} updated successfully`, record);
       }
     } catch (error) {
       // Delete the uploaded file if the database operation fails
@@ -149,7 +170,7 @@ exports.updateImage = (model, id, req, res, inputField, path) => {
         return errorResponse(res, error.message, error.errors);
       }
       
-      errorResponse(res, "Failed to update data", error);
+      return errorResponse(res, "Failed to update data", error.message);
     }
   });
 };
@@ -167,11 +188,11 @@ exports.deleteImage = async (model, id, req, res, inputField, path) => {
         await deleteOldImage(model, id, path, inputField, res);
         await destroy(model, id, res, path);
       } else {
-        errorResponse(res, "ID not Found", null, 404);
+        return errorResponse(res, "ID not Found", null, 404);
       }
     })
     .catch((err) => {
-      errorResponse(res, "ID not Found", null, 404);
+      return errorResponse(res, "ID not Found", err, 404);
     });
 };
 
@@ -179,19 +200,19 @@ exports.deleteImage = async (model, id, req, res, inputField, path) => {
  * remove old image by old name
  */
 const deleteOldImage = async (model, id, path, inputField, res) => {
-  await model.findById(id, (err, thisModel) => {
-    if (err) {
-      errorResponse(res, "ID not Found", null, 404);
-    }
+  const record = await model.findById(id);
+  
+  if(!record) {
+    return errorResponse(res, "ID not Found", null, 404);
+  }
 
-    try {
-      if (fs.existsSync(uploadPath + path + "/" + thisModel[inputField])) {
-        fs.unlinkSync(uploadPath + path + "/" + thisModel[inputField]);
-      }
-    } catch (err) {
-      errorResponse(res, "Image can't be deleted");
+  try {
+    if (fs.existsSync(uploadPath + path + "/" + record[inputField])) {
+      fs.unlinkSync(uploadPath + path + "/" + record[inputField]);
     }
-  });
+  } catch (err) {
+    return errorResponse(res, "Image can't be deleted");
+  }
 };
 
 /**

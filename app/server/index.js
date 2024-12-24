@@ -8,8 +8,6 @@ const config = require('../config')
 logger.debug('Debug level message');
 logger.info('Server process starting');
 
-logger.info('Server process starting');
-
 // Server setup and listener
 app.listen(config.express.port, config.express.ip, function (error) {
   if (error) {

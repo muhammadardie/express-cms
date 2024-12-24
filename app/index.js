@@ -4,20 +4,11 @@ import middleware from './middleware';
 import apiRoutes from './routes/apiRoutes';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import logger from './utils/logger';
+import { errorResponse, successResponse } from './utils/response.js';
 
 const app    = express()
 const config = require('./config')
-
-// Connect to the database
-mongoose.connect(config.mongodb.url, {
-	useNewUrlParser: true, 
-	useUnifiedTopology: true, 
-	useCreateIndex: true,
-	useFindAndModify: false
-})
-.catch(error => { 
-	console.log(`Caught "${error.message}" at ${Date.now()}`); 
-});
 
 // setup swagger
 const options = {
@@ -33,6 +24,8 @@ const options = {
   
 const specs = swaggerJsdoc(options);
 
+app.use('/uploaded_files', express.static('uploaded_files'))
+
 app.use(
 	"/api-docs",
 	swaggerUi.serve,
@@ -46,15 +39,31 @@ app.use('/api', apiRoutes);
 
 // Catch 400 errors
 app.use((req, res) => {
-    console.log(`Invalid request to ${req.originalUrl}`);
-    res.status(400).json({ error: 'Bad request', url: req.originalUrl });
+	let errMessage = `Invalid request to ${req.originalUrl}`
+	logger.error(errMessage); 
+
+	return errorResponse(res, 'Bad request', errMessage);
 });
 
 // Catch 500 errors
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Internal server error', message: err.message });
+	logger.error(err.stack); 
+	
+	return errorResponse(res, 'Internal server error', err.message);
 });
+
+main().catch((err) => console.log(err));
+
+async function main() {
+	// Connect to the database
+	await mongoose.connect(config.mongodb.url)
+	.then(() => {
+		logger.info("Mongoose server has started")
+	})
+	.catch(error => { 
+		logger.error(`Caught "${error.message}" at ${Date.now()}`); 
+	});
+}
 
 // Export the app instance for unit testing via supertest
 module.exports = app

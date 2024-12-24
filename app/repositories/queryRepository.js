@@ -10,7 +10,7 @@ exports.find = async (model, id, res) => {
     model.findById(id)
          .then(record => {
             if(record){
-               successResponse(res, "", record)
+               successResponse(res, `${model.modelName} retrieved successfully`, record)
             } else {
                 res.send({ error: 'ID not Found'})
             }
@@ -27,7 +27,7 @@ exports.find = async (model, id, res) => {
 exports.findBy = (model, condition, res) => {
     model.find(condition)
          .then(record => {
-            successResponse(res, "", record)
+            successResponse(res, `${model.modelName} retrieved successfully`, record)
          })
          .catch(err => {
             errorResponse(res, condition+' not Found', err)
@@ -40,7 +40,7 @@ exports.findBy = (model, condition, res) => {
 exports.all = (model, res) => {
     model.find({})
          .then(record => {
-            successResponse(res, "", record)
+            successResponse(res, `${model.modelName} retrieved successfully`, record)
          })
          .catch(err => {
             errorResponse(res, "Failed to retrieve data", err)

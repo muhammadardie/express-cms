@@ -4,17 +4,17 @@ const router = require('express').Router()
 
 /**
  * @swagger
- * /api/services:
+ * /api/socmed:
  *   get:
- *     summary: Get all services
- *     description: Retrieve a list of all services.
+ *     summary: Get all social media items
+ *     description: Retrieve a list of all social media entries.
  *     tags:
- *       - Services
+ *       - Social Media
  *     security:
  *       - bearerAuth: []  # Requires the Bearer token for this endpoint
  *     responses:
  *       200:
- *         description: A list of services
+ *         description: A list of social media items
  *         content:
  *           application/json:
  *             schema:
@@ -22,55 +22,49 @@ const router = require('express').Router()
  *               properties:
  *                 status:
  *                   type: boolean
- *                   description: Indicates success or failure
  *                 code:
  *                   type: integer
- *                   description: HTTP status code
  *                 message:
  *                   type: string
- *                   description: Success message or error message
  *                 data:
  *                   type: array
- *                   description: List of services
  *                   items:
  *                     type: object
  *                     properties:
  *                       _id:
  *                         type: string
- *                         description: The service ID
- *                       title:
+ *                         description: The ID of the social media entry
+ *                       name:
  *                         type: string
- *                         description: The title of the service
+ *                         description: The name of the social media platform
  *                       icon:
  *                         type: string
- *                         description: The font icon associated with the service
- *                       desc:
+ *                         description: The font icon of the social media
+ *                       url:
  *                         type: string
- *                         description: The description of the service
+ *                         description: The URL of the social media platform
  *                       createdAt:
  *                         type: string
  *                         format: date-time
- *                         description: The creation timestamp of the service
  *                       updatedAt:
  *                         type: string
  *                         format: date-time
- *                         description: The last update timestamp of the service
  *             example:
  *               status: true
  *               code: 200
- *               message: "Services retrieved successfully"
+ *               message: "Social media items retrieved successfully"
  *               data:
  *                 - _id: "1"
- *                   title: "Service 1"
- *                   icon: "fa fa-pencil"
- *                   desc: "Description for Service 1"
+ *                   name: "Twitter"
+ *                   icon: "icon-twitter"
+ *                   url: "https://twitter.com"
  *                   createdAt: "2024-12-23T10:00:00Z"
  *                   updatedAt: "2024-12-23T10:00:00Z"
  *   post:
- *     summary: Create a new service
- *     description: Add a new service to the database.
+ *     summary: Add a new social media entry
+ *     description: Create a new social media entry in the database.
  *     tags:
- *       - Services
+ *       - Social Media
  *     security:
  *       - bearerAuth: []  # Requires the Bearer token for this endpoint
  *     requestBody:
@@ -80,26 +74,26 @@ const router = require('express').Router()
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *               - icon
- *               - desc
+ *               - url
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 description: The title of the service
+ *                 description: The name of the social media platform
  *               icon:
  *                 type: string
- *                 description: The font icon associated with the service
- *               desc:
+ *                 description: The font icon of the social media
+ *               url:
  *                 type: string
- *                 description: The description of the service
+ *                 description: The URL of the social media platform
  *             example:
- *               title: "Service 1"
- *               icon: "fa fa-pencil"
- *               desc: "Description for Service 1"
+ *               name: "Twitter"
+ *               icon: "icon-twitter"
+ *               url: "https://twitter.com"
  *     responses:
  *       200:
- *         description: Service created successfully
+ *         description: Social media entry created successfully
  *         content:
  *           application/json:
  *             schema:
@@ -107,73 +101,60 @@ const router = require('express').Router()
  *               properties:
  *                 status:
  *                   type: boolean
- *                   description: Indicates success or failure
  *                 code:
  *                   type: integer
- *                   description: HTTP status code
  *                 message:
  *                   type: string
- *                   description: Success message
- *                 service:
+ *                 data:
  *                   type: object
  *                   properties:
  *                     _id:
  *                       type: string
- *                       description: The service ID
- *                     title:
+ *                     name:
  *                       type: string
- *                       description: The title of the service
  *                     icon:
  *                       type: string
- *                       description: The font icon associated with the service
- *                     desc:
+ *                     url:
  *                       type: string
- *                       description: The description of the service
  *                     createdAt:
  *                       type: string
  *                       format: date-time
- *                       description: The creation timestamp of the service
  *                     updatedAt:
  *                       type: string
  *                       format: date-time
- *                       description: The last update timestamp of the service
  *             example:
  *               status: true
  *               code: 200
- *               message: "Service created successfully"
- *               service:
+ *               message: "Social media entry created successfully"
+ *               data:
  *                 _id: "1"
- *                 title: "Service 1"
- *                 icon: "fa fa-pencil"
- *                 desc: "Description for Service 1"
+ *                 name: "Twitter"
+ *                 icon: "icon-twitter"
+ *                 url: "https://twitter.com"
  *                 createdAt: "2024-12-23T10:00:00Z"
  *                 updatedAt: "2024-12-23T10:00:00Z"
- *       400:
- *         description: Bad request
- *       500:
- *         description: Internal server error
  */
 
 /**
  * @swagger
- * /api/services/{serviceId}:
+ * /api/socmed/{socmedId}:
  *   get:
- *     summary: Get a service item
- *     description: Retrieve a specific service item by its ID.
+ *     summary: Get a specific social media item
+ *     description: Retrieve a specific social media entry by its ID.
  *     tags:
- *       - Services
+ *       - Social Media
  *     parameters:
  *       - in: path
- *         name: serviceId
+ *         name: socmedId
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the service item to retrieve
+ *         description: The ID of the social media item to retrieve
  *     security:
- *       - bearerAuth: []  # This requires the Bearer token for this endpoint
+ *       - bearerAuth: []  # Requires the Bearer token for this endpoint
  *     responses:
  *       200:
- *         description: A single service item
+ *         description: A specific social media item
  *         content:
  *           application/json:
  *             schema:
@@ -181,55 +162,52 @@ const router = require('express').Router()
  *               properties:
  *                 status:
  *                   type: boolean
- *                   description: Indicates success or failure
  *                 code:
  *                   type: integer
- *                   description: HTTP status code
  *                 message:
  *                   type: string
- *                   description: Success message
- *                 service:
+ *                 data:
  *                   type: object
  *                   properties:
  *                     _id:
  *                       type: string
- *                       description: The service ID
- *                     title:
+ *                     name:
  *                       type: string
- *                       description: The service title
  *                     icon:
  *                       type: string
- *                       description: The service icon
- *                     desc:
+ *                     url:
  *                       type: string
- *                       description: The service description
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *             example:
  *               status: true
  *               code: 200
- *               message: ""
- *               service:
+ *               message: "Social media entry retrieved successfully"
+ *               data:
  *                 _id: "1"
- *                 title: "Web Development"
- *                 icon: "web-icon.png"
- *                 desc: "Professional web development services"
- *       404:
- *         description: Service item not found
- *       500:
- *         description: Internal server error
+ *                 name: "Twitter"
+ *                 icon: "icon-twitter"
+ *                 url: "https://twitter.com"
+ *                 createdAt: "2024-12-23T10:00:00Z"
+ *                 updatedAt: "2024-12-23T10:00:00Z"
  *   put:
- *     summary: Update a service item
- *     description: Update the details of an existing service item.
+ *     summary: Update a social media item
+ *     description: Update the details of an existing social media item.
  *     tags:
- *       - Services
+ *       - Social Media
  *     parameters:
  *       - in: path
- *         name: serviceId
+ *         name: socmedId
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the service item to update
+ *         description: The ID of the social media item to update
  *     security:
- *       - bearerAuth: []  # This requires the Bearer token for this endpoint
+ *       - bearerAuth: []  # Requires the Bearer token for this endpoint
  *     requestBody:
  *       required: true
  *       content:
@@ -237,26 +215,23 @@ const router = require('express').Router()
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *               - icon
- *               - desc
+ *               - url
  *             properties:
- *               title:
+ *               name:
  *                 type: string
- *                 description: The title of the service
  *               icon:
  *                 type: string
- *                 description: The icon of the service
- *               desc:
+ *               url:
  *                 type: string
- *                 description: The description of the service
  *             example:
- *               title: "Web Development"
- *               icon: "new-icon.png"
- *               desc: "Updated description for the service"
+ *               name: "Twitter"
+ *               icon: "updated-icon-twitter"
+ *               url: "https://twitter.com/new"
  *     responses:
  *       200:
- *         description: Service updated successfully
+ *         description: Social media entry updated successfully
  *         content:
  *           application/json:
  *             schema:
@@ -264,60 +239,55 @@ const router = require('express').Router()
  *               properties:
  *                 status:
  *                   type: boolean
- *                   description: Indicates success or failure
  *                 code:
  *                   type: integer
- *                   description: HTTP status code
  *                 message:
  *                   type: string
- *                   description: Success message
- *                 service:
+ *                 data:
  *                   type: object
  *                   properties:
  *                     _id:
  *                       type: string
- *                       description: The service ID
- *                     title:
+ *                     name:
  *                       type: string
- *                       description: The service title
  *                     icon:
  *                       type: string
- *                       description: The service icon
- *                     desc:
+ *                     url:
  *                       type: string
- *                       description: The service description
+ *                     createdAt:
+ *                       type: string
+ *                       format: date-time
+ *                     updatedAt:
+ *                       type: string
+ *                       format: date-time
  *             example:
  *               status: true
  *               code: 200
- *               message: "Service updated successfully"
- *               service:
+ *               message: "Social media entry updated successfully"
+ *               data:
  *                 _id: "1"
- *                 title: "Web Development"
- *                 icon: "updated-icon.png"
- *                 desc: "Updated description for the service"
- *       400:
- *         description: Bad request
- *       404:
- *         description: Service item not found
- *       500:
- *         description: Internal server error
+ *                 name: "Twitter"
+ *                 icon: "updated-icon-twitter"
+ *                 url: "https://twitter.com/new"
+ *                 createdAt: "2024-12-23T10:00:00Z"
+ *                 updatedAt: "2024-12-23T12:00:00Z"
  *   delete:
- *     summary: Delete a service item
- *     description: Remove a service item by its ID.
+ *     summary: Delete a social media item
+ *     description: Remove a social media item by its ID.
  *     tags:
- *       - Services
+ *       - Social Media
  *     parameters:
  *       - in: path
- *         name: serviceId
+ *         name: socmedId
  *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the service item to delete
+ *         description: The ID of the social media item to delete
  *     security:
- *       - bearerAuth: []  # This requires the Bearer token for this endpoint
+ *       - bearerAuth: []  # Requires the Bearer token for this endpoint
  *     responses:
  *       200:
- *         description: Service deleted successfully
+ *         description: Social media entry deleted successfully
  *         content:
  *           application/json:
  *             schema:
@@ -325,28 +295,26 @@ const router = require('express').Router()
  *               properties:
  *                 status:
  *                   type: boolean
- *                   description: Indicates success or failure
  *                 code:
  *                   type: integer
- *                   description: HTTP status code
  *                 message:
  *                   type: string
- *                   description: Success message
  *             example:
  *               status: true
  *               code: 200
- *               message: "Service deleted successfully"
+ *               message: "Social media entry deleted successfully"
  *       404:
- *         description: Service item not found
+ *         description: Social media item not found
  *       500:
  *         description: Internal server error
  */
 
-router.get('/socmed', socmed.getSocmeds)
-router.post('/socmed', socmed.storeSocmed)
 
-router.get('/socmed/:socmedId', socmed.findSocmed)
-router.put('/socmed/:socmedId', socmed.updateSocmed)
-router.delete('/socmed/:socmedId', socmed.deleteSocmed)
+router.get('/socmeds', socmed.getSocmeds)
+router.post('/socmeds', socmed.storeSocmed)
+
+router.get('/socmeds/:socmedId', socmed.findSocmed)
+router.put('/socmeds/:socmedId', socmed.updateSocmed)
+router.delete('/socmeds/:socmedId', socmed.deleteSocmed)
 
 module.exports = router

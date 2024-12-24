@@ -9,15 +9,30 @@ import mongoose, {
 const BlogScheme = new Schema({
     title: {
         type: String,
-        required: "What is the blog's title?"
+        maxlength: 150,
+        required: [true, 'Title is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Title cannot be empty',
+        },
     },
     image: {
         type: String,
+        required: [true, 'Image is required'],
     },
     content: {
         type: String,
-        required: "What is blog's content?"
-        }
+        maxlength: 500,
+        required: [true, 'Content is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Content cannot be empty',
+        },
+    }
 },
 {timestamps: true});
 
