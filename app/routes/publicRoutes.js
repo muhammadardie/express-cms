@@ -1,31 +1,44 @@
-import express from 'express';
-import path from 'path';
+import carousel from '../components/carousel/carouselController';
+import service from '../components/service/serviceController';
+import gallery from '../components/gallery/galleryController';
+import testimony from '../components/testimony/testimonyController';
+import socmed from '../components/socmed/socmedController';
+import blog from '../components/blog/blogController';
+import header from '../components/header/headerController';
+import about from '../components/about/aboutController';
 
-const app  = express()
-const cors = require('cors')
+const router = require('express').Router()
 
-app.use(cors())
-app.use(require('../components/auth/authRouter'))
-app.use(require('../components/user/userRouter'))
-app.use(require('../components/carousel/carouselRouter'))
-app.use(require('../components/service/serviceRouter'))
-app.use(require('../components/gallery/galleryRouter'))
-app.use(require('../components/testimony/testimonyRouter'))
-app.use(require('../components/socmed/socmedRouter'))
-app.use(require('../components/blog/blogRouter'))
-app.use(require('../components/header/headerRouter'))
-app.use(require('../components/about/aboutRouter'))
-app.use(require('../components/contact/contactRouter'))
-app.use(require('../components/inbox/inboxRouter'))
-app.use(require('../components/team/teamRouter'))
-app.use(require('../components/company/companyRouter'))
+router.get('/carousels', carousel.getCarousels)
+router.get('/carousels/:carouselId', carousel.findCarousel)
 
-// fetching image in uploaded file folder
-app.get('/fetchImage/:file(*)', (req, res) => {
-    let file = req.params.file;
-    let fileLocation = path.join(__dirname, '../../', 'uploaded_files/', file);
-    //res.send({image: fileLocation});
-    res.sendFile(`${fileLocation}`)
-})
+router.get('/services', service.getServices)
+router.get('/services/:serviceId', service.findService)
 
-module.exports = app
+router.get('/galleries', gallery.getGallerys)
+router.get('/galleries/:galleryId', gallery.findGallery)
+
+router.get('/testimonies', testimony.getTestimonys)
+router.get('/testimonies/:testimonyId', testimony.findTestimony)
+
+router.get('/socmeds', socmed.getSocmeds)
+router.get('/socmeds/:socmedId', socmed.findSocmed)
+
+router.get('/blogs', blog.getBlogs)
+router.get('/blogs/:blogId', blog.findBlog)
+
+router.get('/headers', header.getHeaders)
+router.get('/headers/:headerId', header.findHeader)
+router.get('/headers/page/:page', header.findHeaderByPage)
+
+router.get('/abouts', about.getAbouts)
+router.get('/abouts/:aboutId', about.findAbout)
+
+// app.use(require('../components/header/headerRouter'))
+// app.use(require('../components/about/aboutRouter'))
+// app.use(require('../components/contact/contactRouter'))
+// app.use(require('../components/inbox/inboxRouter'))
+// app.use(require('../components/team/teamRouter'))
+// app.use(require('../components/company/companyRouter'))
+
+module.exports = router

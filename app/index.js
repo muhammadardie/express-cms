@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import middleware from './middleware';
 import apiRoutes from './routes/apiRoutes';
+import publicRoutes from './routes/publicRoutes';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import logger from './utils/logger';
@@ -34,7 +35,7 @@ app.use(
   
 // Load the routes ("controllers" -ish)
 app.use(middleware)
-// app.use('/', publicRoutes);
+app.use('/api/public', publicRoutes);
 app.use('/api', apiRoutes);
 
 // Catch 400 errors

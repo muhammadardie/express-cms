@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findTeam = (req, res) => {
-    find(team, req.params.teamId, res);
+exports.findTeam = async (req, res) => {
+    await find(team, req.params.teamId, res);
 };
 
-exports.getTeams = (req, res) => {
-    all(team, res);
+exports.getTeams = async (req, res) => {
+    await all(team, res);
 };
 
-exports.storeTeam = (req, res) => {
-	storeImage(team, req, res, 'image', 'team'); // (model, request, respond, fieldName, pathName)
+exports.storeTeam = async (req, res) => {
+	await storeImage(team, req, res, 'image', 'team'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateTeam = (req, res) => {
-	updateImage(team, req.params.teamId, req, res, 'image', 'team'); // (model, id, request, respond, fieldName, pathName)
+exports.updateTeam = async (req, res) => {
+	await updateImage(team, req.params.teamId, req, res, 'image', 'team'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteTeam = (req, res) => {
-    deleteImage(team, req.params.teamId, req, res, 'image','team');
+exports.deleteTeam = async (req, res) => {
+    await deleteImage(team, req.params.teamId, req, res, 'image','team');
 };

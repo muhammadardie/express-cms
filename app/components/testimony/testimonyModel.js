@@ -20,7 +20,7 @@ const TestimonyScheme = new Schema({
     },
     avatar: {
         type: String,
-        required: [true, 'Image is required'],
+        required: [true, 'Avatar is required'],
     },
     comment: {
         type: String,

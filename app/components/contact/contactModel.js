@@ -9,15 +9,36 @@ import mongoose, {
 const ContactScheme = new Schema({
     address: {
         type: String,
-        required: "What is the contact address?"
+        maxlength: 250,
+        required: [true, 'Address is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Address cannot be empty',
+        },
     },
     phone: {
         type: String,
-        required: "What is the contact phone?"
+        maxlength: 100,
+        required: [true, 'Phone number is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Phone number cannot be empty',
+        },
     },
     mail: {
         type: String,
-        required: "What is the contact mail?"
+        maxlength: 100,
+        required: [true, 'Email is required'],
+        validate: {
+            validator: function (v) {
+                return v.trim().length > 0;
+            },
+            message: 'Email cannot be empty',
+        },
     }
 },
 {timestamps: true});

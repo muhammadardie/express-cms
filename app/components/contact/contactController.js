@@ -1,22 +1,22 @@
 import contact from './contactModel.js';
 import { all, find, create, update, destroy } from '../../repositories/queryRepository.js';
 
-exports.findContact = (req, res) => {
-    find(contact, req.params.contactId, res);
+exports.findContact = async (req, res) => {
+    await find(contact, req.params.contactId, res);
 };
 
-exports.getContacts = (req, res) => {
-    all(contact, res);
+exports.getContacts = async (req, res) => {
+    await all(contact, res);
 };
 
-exports.storeContact = (req, res) => {
-    create(contact, req.body, res);
+exports.storeContact = async (req, res) => {
+    await create(contact, req.body, res);
 };
 
-exports.updateContact = (req, res) => {
-    update(contact, req.params.contactId, req.body, res);
+exports.updateContact = async (req, res) => {
+    await update(contact, req.params.contactId, req.body, res);
 };
 
-exports.deleteContact = (req, res) => {
-    destroy(contact, req.params.contactId, res, 'contact');
+exports.deleteContact = async (req, res) => {
+    await destroy(contact, req.params.contactId, res, 'contact');
 };

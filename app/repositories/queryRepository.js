@@ -10,14 +10,14 @@ exports.find = async (model, id, res) => {
     model.findById(id)
          .then(record => {
             if(record){
-               successResponse(res, `${model.modelName} retrieved successfully`, record)
+               return successResponse(res, `${model.modelName} retrieved successfully`, record)
             } else {
-                res.send({ error: 'ID not Found'})
+               return errorResponse(res, "ID not Found", null, 404);
             }
             
          })
          .catch(err => {
-            errorResponse(res, "ID not Found")
+            return errorResponse(res, "ID not Found")
          });
 }
 
@@ -27,10 +27,10 @@ exports.find = async (model, id, res) => {
 exports.findBy = (model, condition, res) => {
     model.find(condition)
          .then(record => {
-            successResponse(res, `${model.modelName} retrieved successfully`, record)
+            return successResponse(res, `${model.modelName} retrieved successfully`, record)
          })
          .catch(err => {
-            errorResponse(res, condition+' not Found', err)
+            return errorResponse(res, condition+' not Found', err)
         });
 };
 
@@ -40,10 +40,10 @@ exports.findBy = (model, condition, res) => {
 exports.all = (model, res) => {
     model.find({})
          .then(record => {
-            successResponse(res, `${model.modelName} retrieved successfully`, record)
+            return successResponse(res, `${model.modelName} retrieved successfully`, record)
          })
          .catch(err => {
-            errorResponse(res, "Failed to retrieve data", err)
+            return errorResponse(res, "Failed to retrieve data", err)
         });
 };
 
@@ -53,7 +53,7 @@ exports.all = (model, res) => {
 exports.create = async(model, body, res) => {
     model.create(body)
          .then(record => {
-            successResponse(res, `${model.modelName} created successfully`, record)
+            return successResponse(res, `${model.modelName} created successfully`, record)
          })
          .catch(err => {
             if (err) {
@@ -61,7 +61,7 @@ exports.create = async(model, body, res) => {
                    return errorResponse(res, err.message, err.errors);
                }
                else {
-                  errorResponse(res, "Failed to store data", err)
+                  return errorResponse(res, "Failed to store data", err)
                }
            }
          });
@@ -77,7 +77,7 @@ exports.update = (model, id, body, res) => {
                { new: true, runValidators: true }
          )
          .then(record => {
-            successResponse(res, `${model.modelName} updated successfully`, record)
+            return successResponse(res, `${model.modelName} updated successfully`, record)
          })
          .catch(err => {
             if (err) {
@@ -85,7 +85,7 @@ exports.update = (model, id, body, res) => {
                    return errorResponse(res, err.message, err.errors);
                }
                else {
-                  errorResponse(res, "Failed to update data", err)
+                  return errorResponse(res, "Failed to update data", err)
                }
            }
          });
@@ -97,9 +97,9 @@ exports.update = (model, id, body, res) => {
 exports.destroy = (model, id, res, message = null) => {
     model.deleteOne({_id: id})
          .then(record => {
-            successResponse(res, `${model.modelName} deleted successfully`)
+            return successResponse(res, `${model.modelName} deleted successfully`)
          })
          .catch(err => {
-            errorResponse(res, "Failed to delete data", err)
+            return errorResponse(res, "Failed to delete data", err)
          });
 };
