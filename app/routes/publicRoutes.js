@@ -6,6 +6,9 @@ import socmed from '../components/socmed/socmedController';
 import blog from '../components/blog/blogController';
 import header from '../components/header/headerController';
 import about from '../components/about/aboutController';
+import contact from '../components/contact/contactController';
+import team from '../components/team/teamController';
+import company from '../components/company/companyController';
 
 const router = require('express').Router()
 
@@ -34,11 +37,13 @@ router.get('/headers/page/:page', header.findHeaderByPage)
 router.get('/abouts', about.getAbouts)
 router.get('/abouts/:aboutId', about.findAbout)
 
-// app.use(require('../components/header/headerRouter'))
-// app.use(require('../components/about/aboutRouter'))
-// app.use(require('../components/contact/contactRouter'))
-// app.use(require('../components/inbox/inboxRouter'))
-// app.use(require('../components/team/teamRouter'))
-// app.use(require('../components/company/companyRouter'))
+router.get('/contacts', contact.getContacts)
+router.get('/contacts/:contactId', contact.findContact)
+
+router.get('/teams', team.getTeams)
+router.get('/teams/:teamId', team.findTeam)
+
+router.get('/companies', company.getCompanys)
+router.get('/companies/:companyId', company.findCompany)
 
 module.exports = router

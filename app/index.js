@@ -10,6 +10,8 @@ import { errorResponse, successResponse } from './utils/response.js';
 
 const app    = express()
 const config = require('./config')
+const cors = require('cors')
+
 
 // setup swagger
 const options = {
@@ -25,6 +27,7 @@ const options = {
   
 const specs = swaggerJsdoc(options);
 
+app.use(cors())
 app.use('/uploaded_files', express.static('uploaded_files'))
 
 app.use(
