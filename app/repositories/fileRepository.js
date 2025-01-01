@@ -10,7 +10,7 @@ const uploadPath = path.join(__dirname, "../../", "uploaded_files/");
 /**
  * store image and record
  */
-exports.storeImage = async (model, req, res, inputField, path) => {
+export const storeImage = async (model, req, res, inputField, path) => {
   // Check if the request Content-Type is multipart/form-data
   if (
     !req.headers["content-type"] ||
@@ -91,7 +91,7 @@ exports.storeImage = async (model, req, res, inputField, path) => {
 /**
  * update image and record
  */
-exports.updateImage = (model, id, req, res, inputField, path) => {
+export const updateImage = (model, id, req, res, inputField, path) => {
   let newFileName, uploadedFilePath;
   let form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -178,7 +178,7 @@ exports.updateImage = (model, id, req, res, inputField, path) => {
 /**
  * delete image and record
  */
-exports.deleteImage = async (model, id, req, res, inputField, path) => {
+export const deleteImage = async (model, id, req, res, inputField, path) => {
   // check if id exist
   model
     .findById(id)

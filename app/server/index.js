@@ -1,8 +1,6 @@
-import "dotenv/config.js";
 import logger from '../utils/logger';
-
-const app    = require('../index')
-const config = require('../config')
+import app from '../index';
+import config from '../config';
 
 // Test logs
 logger.debug('Debug level message');

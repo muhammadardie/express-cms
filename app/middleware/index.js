@@ -6,4 +6,4 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-module.exports = app
+export default app;

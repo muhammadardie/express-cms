@@ -1,6 +1,7 @@
-import contact from './contactController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findContact, getContacts, storeContact, updateContact, deleteContact } from './contactController';
 
 /**
  * @swagger
@@ -299,11 +300,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/contacts', contact.getContacts)
-router.post('/contacts', contact.storeContact)
+router.get('/contacts', getContacts)
+router.post('/contacts', storeContact)
 
-router.get('/contacts/:contactId', contact.findContact)
-router.put('/contacts/:contactId', contact.updateContact)
-router.delete('/contacts/:contactId', contact.deleteContact)
+router.get('/contacts/:contactId', findContact)
+router.put('/contacts/:contactId', updateContact)
+router.delete('/contacts/:contactId', deleteContact)
 
-module.exports = router
+export default router;

@@ -1,49 +1,50 @@
-import carousel from '../components/carousel/carouselController';
-import service from '../components/service/serviceController';
-import gallery from '../components/gallery/galleryController';
-import testimony from '../components/testimony/testimonyController';
-import socmed from '../components/socmed/socmedController';
-import blog from '../components/blog/blogController';
-import header from '../components/header/headerController';
-import about from '../components/about/aboutController';
-import contact from '../components/contact/contactController';
-import team from '../components/team/teamController';
-import company from '../components/company/companyController';
+import express from 'express';
+import { findCarousel, getCarousels } from '../components/carousel/carouselController';
+import { findService, getServices } from '../components/service/serviceController';
+import { findGallery, getGalleries } from '../components/gallery/galleryController';
+import { findTestimony, getTestimonies } from '../components/testimony/testimonyController';
+import { findSocmed, getSocmeds } from '../components/socmed/socmedController';
+import { findBlog, getBlogs } from '../components/blog/blogController';
+import { findHeader, getHeaders, findHeaderByPage } from '../components/header/headerController';
+import { findAbout, getAbouts } from '../components/about/aboutController';
+import { findContact, getContacts } from '../components/contact/contactController';
+import { findTeam, getTeams } from '../components/team/teamController';
+import { findCompany, getCompanies } from '../components/company/companyController';
 
-const router = require('express').Router()
+const router = express.Router();
 
-router.get('/carousels', carousel.getCarousels)
-router.get('/carousels/:carouselId', carousel.findCarousel)
+router.get('/carousels', getCarousels)
+router.get('/carousels/:carouselId', findCarousel)
 
-router.get('/services', service.getServices)
-router.get('/services/:serviceId', service.findService)
+router.get('/services', getServices)
+router.get('/services/:serviceId', findService)
 
-router.get('/galleries', gallery.getGallerys)
-router.get('/galleries/:galleryId', gallery.findGallery)
+router.get('/galleries', getGalleries)
+router.get('/galleries/:galleryId', findGallery)
 
-router.get('/testimonies', testimony.getTestimonys)
-router.get('/testimonies/:testimonyId', testimony.findTestimony)
+router.get('/testimonies', getTestimonies)
+router.get('/testimonies/:testimonyId', findTestimony)
 
-router.get('/socmeds', socmed.getSocmeds)
-router.get('/socmeds/:socmedId', socmed.findSocmed)
+router.get('/socmeds', getSocmeds)
+router.get('/socmeds/:socmedId', findSocmed)
 
-router.get('/blogs', blog.getBlogs)
-router.get('/blogs/:blogId', blog.findBlog)
+router.get('/blogs', getBlogs)
+router.get('/blogs/:blogId', findBlog)
 
-router.get('/headers', header.getHeaders)
-router.get('/headers/:headerId', header.findHeader)
-router.get('/headers/page/:page', header.findHeaderByPage)
+router.get('/headers', getHeaders)
+router.get('/headers/:headerId', findHeader)
+router.get('/headers/page/:page', findHeaderByPage)
 
-router.get('/abouts', about.getAbouts)
-router.get('/abouts/:aboutId', about.findAbout)
+router.get('/abouts', getAbouts)
+router.get('/abouts/:aboutId', findAbout)
 
-router.get('/contacts', contact.getContacts)
-router.get('/contacts/:contactId', contact.findContact)
+router.get('/contacts', getContacts)
+router.get('/contacts/:contactId', findContact)
 
-router.get('/teams', team.getTeams)
-router.get('/teams/:teamId', team.findTeam)
+router.get('/teams', getTeams)
+router.get('/teams/:teamId', findTeam)
 
-router.get('/companies', company.getCompanys)
-router.get('/companies/:companyId', company.findCompany)
+router.get('/companies', getCompanies)
+router.get('/companies/:companyId', findCompany)
 
-module.exports = router
+export default router;

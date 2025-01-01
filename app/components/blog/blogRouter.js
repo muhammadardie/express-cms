@@ -1,6 +1,7 @@
-import blog from './blogController';
+import { findBlog, getBlogs, storeBlog, updateBlog, deleteBlog } from './blogController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
 
 /**
  * @swagger
@@ -310,11 +311,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/blogs', blog.getBlogs)
-router.post('/blogs', blog.storeBlog)
+router.get('/blogs', getBlogs)
+router.post('/blogs', storeBlog)
 
-router.get('/blogs/:blogId', blog.findBlog)
-router.put('/blogs/:blogId', blog.updateBlog)
-router.delete('/blogs/:blogId', blog.deleteBlog)
+router.get('/blogs/:blogId', findBlog)
+router.put('/blogs/:blogId', updateBlog)
+router.delete('/blogs/:blogId', deleteBlog)
 
-module.exports = router
+export default router;

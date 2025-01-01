@@ -1,7 +1,7 @@
-import about from './aboutController';
+import express from 'express';
+import { findAbout, getAbouts, storeAbout, updateAbout, deleteAbout } from './aboutController';
 
-const router = require('express').Router()
-
+const router = express.Router();
 
 /**
  * @swagger
@@ -288,11 +288,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/abouts', about.getAbouts)
-router.post('/abouts', about.storeAbout)
+router.get('/abouts', getAbouts)
+router.post('/abouts', storeAbout)
 
-router.get('/abouts/:aboutId', about.findAbout)
-router.put('/abouts/:aboutId', about.updateAbout)
-router.delete('/abouts/:aboutId', about.deleteAbout)
+router.get('/abouts/:aboutId', findAbout)
+router.put('/abouts/:aboutId', updateAbout)
+router.delete('/abouts/:aboutId', deleteAbout)
 
-module.exports = router
+export default router;

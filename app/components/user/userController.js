@@ -2,19 +2,19 @@ import user from './userModel.js';
 import { all, find, create, destroy } from '../../repositories/queryRepository.js';
 import { errorResponse, successResponse } from '../../utils/response.js';
 
-exports.findUser = async (req, res) => {
+export const findUser = async (req, res) => {
     await find(user, req.params.userId, res);
 };
 
-exports.getUsers = async (req, res) => {
-    await all(user, res);
+export const getUsers = async (req, res) => {
+    all(user, res);
 };
 
-exports.storeUser = async (req, res) => {
+export const storeUser = async (req, res) => {
     await create(user, req.body, res);
 };
 
-exports.updateUser = (req, res) => {
+export const updateUser = (req, res) => {
 	user.findById(req.params.userId, function(err, thisUser) {
 	    if (err) res.send({ error: 'ID not Found'});
 	    thisUser.username = req.body.username;
@@ -37,6 +37,6 @@ exports.updateUser = (req, res) => {
 	});
 };
 
-exports.deleteUser = (req, res) => {
+export const deleteUser = (req, res) => {
     destroy(user, req.params.userId, res);
 };

@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findAbout = async (req, res) => {
+export const findAbout = async (req, res) => {
     await find(about, req.params.aboutId, res);
 };
 
-exports.getAbouts = async (req, res) => {
-    await all(about, res);
+export const getAbouts = async (req, res) => {
+    all(about, res);
 };
 
-exports.storeAbout = async (req, res) => {
+export const storeAbout = async (req, res) => {
 	await storeImage(about, req, res, 'image', 'about'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateAbout = async (req, res) => {
-	await updateImage(about, req.params.aboutId, req, res, 'image', 'about'); // (model, id, request, respond, fieldName, pathName)
+export const updateAbout = async (req, res) => {
+	updateImage(about, req.params.aboutId, req, res, 'image', 'about'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteAbout = async (req, res) => {
+export const deleteAbout = async (req, res) => {
     await deleteImage(about, req.params.aboutId, req, res, 'image','about');
 };

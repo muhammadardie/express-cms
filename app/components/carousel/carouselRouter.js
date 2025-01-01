@@ -1,6 +1,7 @@
-import carousel from './carouselController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findCarousel, getCarousels, storeCarousel, updateCarousel, deleteCarousel } from './carouselController';
 
 /**
  * @swagger
@@ -338,11 +339,11 @@ const router = require('express').Router()
  *               message: "Carousel deleted successfully"
  */
 
-router.get('/carousels', carousel.getCarousels)
-router.post('/carousels', carousel.storeCarousel)
+router.get('/carousels', getCarousels)
+router.post('/carousels', storeCarousel)
 
-router.get('/carousels/:carouselId', carousel.findCarousel)
-router.put('/carousels/:carouselId', carousel.updateCarousel)
-router.delete('/carousels/:carouselId', carousel.deleteCarousel)
+router.get('/carousels/:carouselId', findCarousel)
+router.put('/carousels/:carouselId', updateCarousel)
+router.delete('/carousels/:carouselId', deleteCarousel)
 
-module.exports = router
+export default router;

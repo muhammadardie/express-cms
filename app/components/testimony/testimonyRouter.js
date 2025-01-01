@@ -1,6 +1,8 @@
-import testimony from './testimonyController';
+import express from 'express';
+import { findTestimony, getTestimonies, storeTestimony, updateTestimony, deleteTestimony } from './testimonyController';
 
-const router = require('express').Router()
+const router = express.Router();
+
 
 /**
  * @swagger
@@ -303,11 +305,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/testimonies', testimony.getTestimonys)
-router.post('/testimonies', testimony.storeTestimony)
+router.get('/testimonies', getTestimonies)
+router.post('/testimonies', storeTestimony)
 
-router.get('/testimonies/:testimonyId', testimony.findTestimony)
-router.put('/testimonies/:testimonyId', testimony.updateTestimony)
-router.delete('/testimonies/:testimonyId', testimony.deleteTestimony)
+router.get('/testimonies/:testimonyId', findTestimony)
+router.put('/testimonies/:testimonyId', updateTestimony)
+router.delete('/testimonies/:testimonyId', deleteTestimony)
 
-module.exports = router
+export default router;

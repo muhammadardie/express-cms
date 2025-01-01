@@ -1,6 +1,7 @@
-import auth from './authController';
+import { login, logout, refresh } from './authController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
 
 /**
  * @swagger
@@ -90,8 +91,8 @@ const router = require('express').Router()
  *       500:
  *         description: Internal server error
  */
-router.post('/login', auth.login)
-router.post('/logout', auth.logout)
-router.post('/token/refresh', auth.refresh)
+router.post('/login', login)
+router.post('/logout', logout)
+router.post('/token/refresh', refresh)
 
-module.exports = router
+export default router;

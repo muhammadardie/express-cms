@@ -1,6 +1,7 @@
-import header from './headerController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findHeader, findHeaderByPage, getHeaders, storeHeader, updateHeader, deleteHeader } from './headerController';
 
 /**
  * @swagger
@@ -244,12 +245,12 @@ const router = require('express').Router()
  */
 
 
-router.get('/headers', header.getHeaders)
-router.post('/headers', header.storeHeader)
+router.get('/headers', getHeaders)
+router.post('/headers', storeHeader)
 
-router.get('/headers/:headerId', header.findHeader)
-router.get('/headers/page/:page', header.findHeaderByPage)
-router.put('/headers/:headerId', header.updateHeader)
-router.delete('/headers/:headerId', header.deleteHeader)
+router.get('/headers/:headerId', findHeader)
+router.get('/headers/page/:page', findHeaderByPage)
+router.put('/headers/:headerId', updateHeader)
+router.delete('/headers/:headerId', deleteHeader)
 
-module.exports = router
+export default router;

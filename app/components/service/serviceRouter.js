@@ -1,6 +1,7 @@
-import service from './serviceController';
+import { findService, getServices, storeService, updateService, deleteService } from './serviceController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
 
 /**
  * @swagger
@@ -342,11 +343,11 @@ const router = require('express').Router()
  *         description: Internal server error
  */
 
-router.get('/services', service.getServices)
-router.post('/services', service.storeService)
+router.get('/services', getServices)
+router.post('/services', storeService)
 
-router.get('/services/:serviceId', service.findService)
-router.put('/services/:serviceId', service.updateService)
-router.delete('/services/:serviceId', service.deleteService)
+router.get('/services/:serviceId', findService)
+router.put('/services/:serviceId', updateService)
+router.delete('/services/:serviceId', deleteService)
 
-module.exports = router
+export default router;

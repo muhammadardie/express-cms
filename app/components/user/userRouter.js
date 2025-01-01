@@ -1,6 +1,8 @@
-import user from './userController';
+import express from 'express';
+import { findUser, getUsers, storeUser, updateUser, deleteUser }  from './userController';
 
-const router = require('express').Router()
+
+const router = express.Router();
 
 /**
  * @swagger
@@ -322,11 +324,11 @@ const router = require('express').Router()
  *               code: 200
  */
 
-router.get('/users', user.getUsers)
-router.post('/users', user.storeUser)
+router.get('/users', getUsers)
+router.post('/users', storeUser)
 
-router.get('/users/:userId', user.findUser)
-router.put('/users/:userId', user.updateUser)
-router.delete('/users/:userId', user.deleteUser)
+router.get('/users/:userId', findUser)
+router.put('/users/:userId', updateUser)
+router.delete('/users/:userId', deleteUser)
 
-module.exports = router
+export default router;

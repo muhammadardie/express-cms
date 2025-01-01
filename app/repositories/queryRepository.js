@@ -6,7 +6,7 @@ import { errorResponse, successResponse } from '../utils/response.js';
  * Get object by id
  */
 
-exports.find = async (model, id, res) => {
+export const find = async (model, id, res) => {
     model.findById(id)
          .then(record => {
             if(record){
@@ -24,7 +24,7 @@ exports.find = async (model, id, res) => {
 /**
  * Get all object by model
  */
-exports.findBy = (model, condition, res) => {
+export const findBy = (model, condition, res) => {
     model.find(condition)
          .then(record => {
             return successResponse(res, `${model.modelName} retrieved successfully`, record)
@@ -37,7 +37,7 @@ exports.findBy = (model, condition, res) => {
 /**
  * Get all object by model
  */
-exports.all = (model, res) => {
+export const all = (model, res) => {
     model.find({})
          .then(record => {
             return successResponse(res, `${model.modelName} retrieved successfully`, record)
@@ -50,7 +50,7 @@ exports.all = (model, res) => {
 /**
  * create new object
  */
-exports.create = async(model, body, res) => {
+export const create = async(model, body, res) => {
     model.create(body)
          .then(record => {
             return successResponse(res, `${model.modelName} created successfully`, record)
@@ -70,7 +70,7 @@ exports.create = async(model, body, res) => {
 /**
  * update model by id
  */
-exports.update = (model, id, body, res) => {
+export const update = (model, id, body, res) => {
     model.findOneAndUpdate(
                { _id: id },
                body,
@@ -94,7 +94,7 @@ exports.update = (model, id, body, res) => {
 /**
  * delete model by id
  */
-exports.destroy = (model, id, res, message = null) => {
+export const destroy = (model, id, res, message = null) => {
     model.deleteOne({_id: id})
          .then(record => {
             return successResponse(res, `${model.modelName} deleted successfully`)

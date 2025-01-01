@@ -2,7 +2,7 @@ import user from '../user/userModel.js';
 import { successResponse, errorResponse } from '../../utils/response.js';
 import { generateToken, extractToken, deleteToken, refreshToken } from '../../utils/token.js';
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
 
@@ -40,7 +40,7 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.logout = async (req, res) => {
+export const logout = async (req, res) => {
     const authHeader = req.headers["authorization"];
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -56,7 +56,7 @@ exports.logout = async (req, res) => {
     return errorResponse(res, tokenDeleted.msg, null, 401);
 };
 
-exports.refresh = async (req, res) => {
+export const refresh = async (req, res) => {
     const { refresh_token } = req.body;
     const tokenRefreshed = refreshToken(refresh_token)
 

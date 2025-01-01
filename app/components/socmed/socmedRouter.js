@@ -1,6 +1,7 @@
-import socmed from './socmedController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findSocmed, getSocmeds, storeSocmed, updateSocmed, deleteSocmed } from './socmedController';
 
 /**
  * @swagger
@@ -310,11 +311,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/socmeds', socmed.getSocmeds)
-router.post('/socmeds', socmed.storeSocmed)
+router.get('/socmeds', getSocmeds)
+router.post('/socmeds', storeSocmed)
 
-router.get('/socmeds/:socmedId', socmed.findSocmed)
-router.put('/socmeds/:socmedId', socmed.updateSocmed)
-router.delete('/socmeds/:socmedId', socmed.deleteSocmed)
+router.get('/socmeds/:socmedId', findSocmed)
+router.put('/socmeds/:socmedId', updateSocmed)
+router.delete('/socmeds/:socmedId', deleteSocmed)
 
-module.exports = router
+export default router;

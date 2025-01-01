@@ -1,6 +1,7 @@
-import gallery from './galleryController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findGallery, getGalleries, storeGallery, updateGallery, deleteGallery } from './galleryController';
 
 /**
  * @swagger
@@ -267,11 +268,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/galleries', gallery.getGallerys)
-router.post('/galleries', gallery.storeGallery)
+router.get('/galleries', getGalleries)
+router.post('/galleries', storeGallery)
 
-router.get('/galleries/:galleryId', gallery.findGallery)
-router.put('/galleries/:galleryId', gallery.updateGallery)
-router.delete('/galleries/:galleryId', gallery.deleteGallery)
+router.get('/galleries/:galleryId', findGallery)
+router.put('/galleries/:galleryId', updateGallery)
+router.delete('/galleries/:galleryId', deleteGallery)
 
-module.exports = router
+export default router;

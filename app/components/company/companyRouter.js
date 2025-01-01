@@ -1,6 +1,8 @@
-import company from './companyController';
+import { findCompany, getCompanies, storeCompany, updateCompany, deleteCompany } from './companyController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+
 
 
 /**
@@ -308,11 +310,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/companies', company.getCompanys)
-router.post('/companies', company.storeCompany)
+router.get('/companies', getCompanies)
+router.post('/companies', storeCompany)
 
-router.get('/companies/:companyId', company.findCompany)
-router.put('/companies/:companyId', company.updateCompany)
-router.delete('/companies/:companyId', company.deleteCompany)
+router.get('/companies/:companyId', findCompany)
+router.put('/companies/:companyId', updateCompany)
+router.delete('/companies/:companyId', deleteCompany)
 
-module.exports = router
+export default router;

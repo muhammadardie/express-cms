@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findTestimony = async (req, res) => {
+export const findTestimony = async (req, res) => {
     await find(testimony, req.params.testimonyId, res);
 };
 
-exports.getTestimonys = async (req, res) => {
-    await all(testimony, res);
+export const getTestimonies = async (req, res) => {
+    all(testimony, res);
 };
 
-exports.storeTestimony = async (req, res) => {
+export const storeTestimony = async (req, res) => {
 	await storeImage(testimony, req, res, 'avatar', 'testimony'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateTestimony = async (req, res) => {
-	await updateImage(testimony, req.params.testimonyId, req, res, 'avatar', 'testimony'); // (model, id, request, respond, fieldName, pathName)
+export const updateTestimony = async (req, res) => {
+	updateImage(testimony, req.params.testimonyId, req, res, 'avatar', 'testimony'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteTestimony = async (req, res) => {
+export const deleteTestimony = async (req, res) => {
     await deleteImage(testimony, req.params.testimonyId, req, res, 'avatar','testimony');
 };

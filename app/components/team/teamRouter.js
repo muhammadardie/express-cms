@@ -1,6 +1,7 @@
-import team from './teamController';
+import express from 'express';
 
-const router = require('express').Router()
+const router = express.Router();
+import { findTeam, getTeams, storeTeam, updateTeam, deleteTeam } from './teamController';
 
 /**
  * @swagger
@@ -323,11 +324,11 @@ const router = require('express').Router()
  */
 
 
-router.get('/teams', team.getTeams)
-router.post('/teams', team.storeTeam)
+router.get('/teams', getTeams)
+router.post('/teams', storeTeam)
 
-router.get('/teams/:teamId', team.findTeam)
-router.put('/teams/:teamId', team.updateTeam)
-router.delete('/teams/:teamId', team.deleteTeam)
+router.get('/teams/:teamId', findTeam)
+router.put('/teams/:teamId', updateTeam)
+router.delete('/teams/:teamId', deleteTeam)
 
-module.exports = router
+export default router;

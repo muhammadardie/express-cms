@@ -4,22 +4,22 @@ import { storeImage, updateImage, deleteImage } from '../../repositories/fileRep
 
 // if in field contain file upload use fileRepository
 
-exports.findBlog = async (req, res) => {
+export const findBlog = async (req, res) => {
     await find(blog, req.params.blogId, res);
 };
 
-exports.getBlogs = async (req, res) => {
-    await all(blog, res);
+export const getBlogs = async (req, res) => {
+    all(blog, res);
 };
 
-exports.storeBlog = async (req, res) => {
+export const storeBlog = async (req, res) => {
 	await storeImage(blog, req, res, 'image', 'blog'); // (model, request, respond, fieldName, pathName)
 };
 
-exports.updateBlog = async (req, res) => {
-    await updateImage(blog, req.params.blogId, req, res, 'image', 'blog'); // (model, id, request, respond, fieldName, pathName)
+export const updateBlog = async (req, res) => {
+    updateImage(blog, req.params.blogId, req, res, 'image', 'blog'); // (model, id, request, respond, fieldName, pathName)
 };
 
-exports.deleteBlog = async (req, res) => {
+export const deleteBlog = async (req, res) => {
     await deleteImage(blog, req.params.blogId, req, res, 'image','blog');
 };
