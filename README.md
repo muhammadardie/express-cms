@@ -30,5 +30,5 @@ The alternative version of this service was implemented using Go (echo), which c
 
 ## Demo  
 
-- **APP**: [https://express-cms.muhammadardie.tech](https://express-cms.muhammadardie.tech)  
-- **Documentation**: [https://express-cms.muhammadardie.tech/api-docs/](https://express-cms.muhammadardie.tech/api-docs/)  
+- **APP**: [https://express-cms.ardie.web.id](https://express-cms.ardie.web.id)  
+- **Documentation**: [https://express-cms.ardie.web.id/api-docs/](https://express-cms.ardie.web.id/api-docs/)  
